@@ -53,26 +53,26 @@ function love.draw()
     love.graphics.print('selected x: '..selectedX..', selected y: '..selectedY)
 end
 
-function love.mousepressed(mouseX, mouseY, button)
-    if button == 2 then
-        local neighbourCount = 0
-
-        print('Finding neighbors of grid['..selectedY..']['..selectedX..']')
-
-        for dy = -1, 1 do
-            for dx = -1, 1 do   
-                print('Checking grid['..selectedY + dy..']['..selectedX + dx..']')
-                if not (dy == 0 and dx ==0) and grid[selectedY + dy] and grid[selectedY + dy][selectedX + dx] then
-                    print('Neighbour found')
-                    neighbourCount = neighbourCount + 1
-                end
-            end
-        end
-        print('Total neighbors: '..neighbourCount)
-    end
-end
 
 function love.keypressed(key)
+    local nextGrid = {}
+    for y = 1, gridY do
+        nextGrid[y] = {}
+        for x = 1, gridX do
+            local neighbourCount = 0
+            for dy = -1, 1 do
+                for dx = -1, 1 do   
+                    if not (dy == 0 and dx == 0) and grid[y + dy] and grid[y + dy][x + dx] then
+                        neighbourCount = neighbourCount + 1
+                    end
+                end
+            end
+            nextGrid[y][x] = neighbourCount == 3 or (grid[y][x] and neighbourCount == 2)
+        end
+    end
+
+    grid = nextGrid
+
     if key == 'escape' then
         love.event.quit(0)
     end
