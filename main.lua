@@ -14,9 +14,8 @@ function love.load()
         end
     end
 
--- Temp
-    grid[1][1] = true
-    grid[1][2] = true
+    love.keyboard.setKeyRepeat(true)
+
 end
 
 function love.update()
@@ -52,10 +51,6 @@ function love.draw()
             )
         end
     end
-
---Temp
-    love.graphics.setColor(0, 0, 0)
-    love.graphics.print('selected x: '..selectedX..', selected y: '..selectedY)
 end
 
 
