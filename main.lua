@@ -26,6 +26,11 @@ function love.update()
     if love.mouse.isDown(1) and selectedX <= gridX and selectedY <= gridY then
         grid[selectedY][selectedX] = true
     end
+    
+    if love.mouse.isDown(2) and selectedX <= gridX and selectedY <= gridY then
+        grid[selectedY][selectedX] = false
+    end
+
 end
 
 function love.draw()
